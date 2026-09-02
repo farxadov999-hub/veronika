@@ -1,113 +1,159 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Данные для тестов
-    const quizData = [
-        {
-            question: "Что из перечисленного является устройством ввода?",
-            options: ["Монитор", "Клавиатура", "Принтер", "Динамик"],
-            correct: 1
-        },
-        {
-            question: "Какая система отвечает за управление ресурсами компьютера?",
-            options: ["Операционная система", "Текстовый редактор", "Браузер", "Антивирус"],
-            correct: 0
-        },
-        {
-            question: "Что означает аббревиатура HTML?",
-            options: [
-                "HyperText Markup Language",
-                "HighTech Modern Language",
-                "HyperTransfer Text Mode",
-                "Home Tool Markup Logic"
-            ],
-            correct: 0
-        }
-    ];
+// Данные для модальных окон уроков
+const lessonDetails = {
+    computer: {
+        title: "🖥️ Компьютеры",
+        text: "Компьютер состоит из процессора (CPU), оперативной памяти (RAM), накопителя (SSD/HDD) и материнской платы. Процессор выполняет вычисления, а память хранит временные данные."
+    },
+    programming: {
+        title: "💻 Программирование",
+        text: "Программирование — это процесс создания инструкций для компьютера. Популярные языки: Python, JavaScript, C++, Java. Главное в коде — логика и алгоритмы."
+    },
+    internet: {
+        title: "🌐 Интернет и сети",
+        text: "Сеть — это объединение устройств. Данные передаются по протоколам TCP/IP пакетным способом. У каждого устройства в сети есть уникальный IP-адрес."
+    },
+    security: {
+        title: "🔐 Кибербезопасность",
+        text: "Основа безопасности — надежные пароли, двухфакторная аутентификация (2FA) и осторожность с подозрительными ссылками (защита от фишинга)."
+    },
+    os: {
+        title: "🐧 Операционные системы",
+        text: "ОС (Windows, Linux, macOS) управляет аппаратными ресурсами ПК и предоставляет интерфейс для взаимодействия с пользователем."
+    },
+    ai: {
+        title: "🧠 Искусственный интеллект",
+        text: "ИИ и машинное обучение позволяют компьютерам анализировать огромные объемы данных, распознавать речи и генерировать текст или изображения."
+    }
+};
 
-    let currentQuestion = 0;
-    let score = 0;
+// Данные для теста
+const questions = [
+    {
+        q: "Что является 'мозгом' компьютера?",
+        options: ["Жесткий диск", "Процессор (CPU)", "Монитор", "Блок питания"],
+        correct: 1
+    },
+    {
+        q: "Какая система отвечает за управление файлами и программами?",
+        options: ["Операционная система", "Браузер", "Антивирус", "Текстовый редактор"],
+        correct: 0
+    },
+    {
+        q: "Что такое IP-адрес?",
+        options: ["Имя компьютера", "Уникальный сетевой адрес устройства", "Пароль от Wi-Fi", "Модель видеокарты"],
+        correct: 1
+    }
+];
 
-    const questionEl = document.getElementById('quiz-question');
-    const optionsEl = document.getElementById('quiz-options');
-    const nextBtn = document.getElementById('quiz-next-btn');
-    const resultEl = document.getElementById('quiz-result');
+let currentQ = 0;
+let score = 0;
 
-    function loadQuestion() {
-        if (!questionEl || !optionsEl) return;
-        
-        const data = quizData[currentQuestion];
-        questionEl.textContent = `${currentQuestion + 1}. ${data.question}`;
-        optionsEl.innerHTML = '';
+// Управление меню (гамбургер)
+function toggleMenu() {
+    const menu = document.getElementById('nav-menu');
+    if (menu) menu.classList.toggle('active');
+}
 
-        data.options.forEach((opt, idx) => {
-            const btn = document.createElement('button');
-            btn.className = 'quiz-option-btn';
-            btn.textContent = opt;
-            btn.style.cssText = `
-                display: block;
-                width: 100%;
-                margin: 8px 0;
-                padding: 12px;
-                border: 1px solid #ddd;
-                border-radius: 8px;
-                background: #f9f9f9;
-                cursor: pointer;
-                text-align: left;
-                font-size: 15px;
-            `;
-            btn.onclick = () => selectOption(idx, btn);
-            optionsEl.appendChild(btn);
-        });
+function closeMenu() {
+    const menu = document.getElementById('nav-menu');
+    if (menu) menu.classList.remove('active');
+}
 
-        if (nextBtn) nextBtn.style.display = 'none';
+// Модальные окна уроков
+function openModal(key) {
+    const modal = document.getElementById('modal');
+    const modalBody = document.getElementById('modal-body');
+    if (lessonDetails[key] && modal && modalBody) {
+        modalBody.innerHTML = `
+            <h3>${lessonDetails[key].title}</h3>
+            <p style="margin-top:15px; color:#cbd5e1; line-height:1.6;">${lessonDetails[key].text}</p>
+        `;
+        modal.style.display = 'flex';
+    }
+}
+
+function closeModal() {
+    const modal = document.getElementById('modal');
+    if (modal) modal.style.display = 'none';
+}
+
+function closeModalOutside(e) {
+    if (e.target.id === 'modal') {
+        closeModal();
+    }
+}
+
+// Логика Теста
+function startTest() {
+    currentQ = 0;
+    score = 0;
+    renderQuestion();
+}
+
+function renderQuestion() {
+    const quizBox = document.getElementById('quiz');
+    if (!quizBox) return;
+
+    if (currentQ >= questions.length) {
+        quizBox.innerHTML = `
+            <div style="text-align:center; padding:20px;">
+                <h3>🎉 Тест завершён!</h3>
+                <p style="margin:15px 0;">Ваш результат: <strong>${score} из ${questions.length}</strong></p>
+                <button onclick="startTest()" class="action-btn">Пройти снова</button>
+            </div>
+        `;
+        return;
     }
 
-    function selectOption(index, button) {
-        const data = quizData[currentQuestion];
-        const buttons = optionsEl.querySelectorAll('button');
-        
-        buttons.forEach(b => b.disabled = true);
+    const qData = questions[currentQ];
+    let optionsHTML = '';
+    qData.options.forEach((opt, idx) => {
+        optionsHTML += `
+            <button onclick="checkAnswer(${idx})" class="action-btn" style="display:block; width:100%; margin:8px 0; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); text-align:left;">
+                ${opt}
+            </button>
+        `;
+    });
 
-        if (index === data.correct) {
-            button.style.background = '#d4edda';
-            button.style.borderColor = '#c3e6cb';
-            button.style.color = '#155724';
-            score++;
+    quizBox.innerHTML = `
+        <div style="margin-top:20px;">
+            <h4>Вопрос ${currentQ + 1} из ${questions.length}</h4>
+            <p style="font-size:18px; margin:15px 0;">${qData.q}</p>
+            ${optionsHTML}
+        </div>
+    `;
+}
+
+function checkAnswer(selectedIdx) {
+    if (selectedIdx === questions[currentQ].correct) {
+        score++;
+    }
+    currentQ++;
+    renderQuestion();
+}
+
+// Форма контактов
+function submitForm(e) {
+    e.preventDefault();
+    const status = document.getElementById('form-status');
+    if (status) {
+        status.innerHTML = `<p style="color:#4ade80; margin-top:15px;">✅ Сообщение успешно отправлено!</p>`;
+        document.getElementById('contact-form').reset();
+    }
+}
+
+// Кнопка наверх
+window.onscroll = function() {
+    const btn = document.getElementById('scrollTopBtn');
+    if (btn) {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            btn.style.display = 'block';
         } else {
-            button.style.background = '#f8d7da';
-            button.style.borderColor = '#f5c6cb';
-            button.style.color = '#721c24';
-            buttons[data.correct].style.background = '#d4edda';
-        }
-
-        if (nextBtn) nextBtn.style.display = 'block';
-    }
-
-    if (nextBtn) {
-        nextBtn.onclick = () => {
-            currentQuestion++;
-            if (currentQuestion < quizData.length) {
-                loadQuestion();
-            } else {
-                showResult();
-            }
-        };
-    }
-
-    function showResult() {
-        questionEl.style.display = 'none';
-        optionsEl.style.display = 'none';
-        nextBtn.style.display = 'none';
-        
-        if (resultEl) {
-            resultEl.style.display = 'block';
-            resultEl.innerHTML = `
-                <h3>Тест завершён!</h3>
-                <p>Ваш результат: <strong>${score} из ${quizData.length}</strong></p>
-                <button onclick="location.reload()" style="padding: 10px 20px; margin-top: 10px; cursor: pointer;">Пройти снова</button>
-            `;
+            btn.style.display = 'none';
         }
     }
+};
 
-    // Инициализация
-    loadQuestion();
-});
+function scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
