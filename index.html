@@ -1,125 +1,136 @@
-<<link rel="stylesheet" href="style.css">
-<script src="script.js" defer></script>
-!-- Фоновые неоновые пятна -->
-<div class="bg-glow blob-1"></div>
-<div class="bg-glow blob-2"></div>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Veronika — Основы информатики</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
 
-<nav>
-<div class="logo">💻 Veronika</div>
+    <!-- Фоновые неоновые пятна -->
+    <div class="bg-glow blob-1"></div>
+    <div class="bg-glow blob-2"></div>
 
-<button class="hamburger" id="hamburger" onclick="toggleMenu()">
-<span></span>
-<span></span>
-<span></span>
-</button>
+    <nav>
+        <div class="logo">💻 Veronika</div>
 
-<div class="menu" id="nav-menu">
-<a href="#home" onclick="closeMenu()">Главная</a>
-<a href="#lessons" onclick="closeMenu()">Уроки</a>
-<a href="#test" onclick="closeMenu()">Тест</a>
-<a href="#contact" onclick="closeMenu()">Контакты</a>
-</div>
-</nav>
+        <button class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
 
-<header id="home">
-<div class="header-badge">✨ Наука будущего</div>
-<h1>Основы информатики</h1>
-<p>Изучай технологии, программирование и ИИ в интерактивном формате</p>
-<a href="#lessons" class="main-button">Начать обучение →</a>
-</header>
+        <div class="menu" id="nav-menu">
+            <a href="#home" onclick="closeMenu()">Главная</a>
+            <a href="#lessons" onclick="closeMenu()">Уроки</a>
+            <a href="#test" onclick="closeMenu()">Тест</a>
+            <a href="#contact" onclick="closeMenu()">Контакты</a>
+        </div>
+    </nav>
 
-<main>
-<section class="intro glass-panel" id="about">
-<h2>📚 Что такое информатика?</h2>
-<p>
-Информатика — это фундаментальная наука об информации,
-вычислительных системах и цифровых технологиях.
-Погрузись в устройство компьютеров, основы алгоритмов и безопасность в сети.
-</p>
-</section>
+    <header id="home">
+        <div class="header-badge">✨ Наука будущего</div>
+        <h1>Основы информатики</h1>
+        <p>Изучай технологии, программирование и ИИ в интерактивном формате</p>
+        <a href="#lessons" class="main-button">Начать обучение →</a>
+    </header>
 
-<section id="lessons">
-<h2>🎓 Интерактивные уроки</h2>
+    <main>
+        <section class="intro glass-panel" id="about">
+            <h2>📚 Что такое информатика?</h2>
+            <p>
+                Информатика — это фундаментальная наука об информации,
+                вычислительных системах и цифровых технологиях.
+                Погрузись в устройство компьютеров, основы алгоритмов и безопасность в сети.
+            </p>
+        </section>
 
-<div class="cards">
-<div class="card glass-panel">
-<div class="icon">🖥️</div>
-<h3>Компьютеры</h3>
-<p>Устройство ПК, микропроцессоры и архитектура памяти.</p>
-<button onclick="openModal('computer')">Подробнее</button>
-</div>
+        <section id="lessons">
+            <h2>🎓 Интерактивные уроки</h2>
 
-<div class="card glass-panel">
-<div class="icon">💻</div>
-<h3>Программирование</h3>
-<p>Языки кода, алгоритмы и создание программных продуктов.</p>
-<button onclick="openModal('programming')">Подробнее</button>
-</div>
+            <div class="cards">
+                <div class="card glass-panel">
+                    <div class="icon">🖥️</div>
+                    <h3>Компьютеры</h3>
+                    <p>Устройство ПК, микропроцессоры и архитектура памяти.</p>
+                    <button onclick="openModal('computer')">Подробнее</button>
+                </div>
 
-<div class="card glass-panel">
-<div class="icon">🌐</div>
-<h3>Интернет и сети</h3>
-<p>Сетевые протоколы, IP-адресация и передача данных.</p>
-<button onclick="openModal('internet')">Подробнее</button>
-</div>
+                <div class="card glass-panel">
+                    <div class="icon">💻</div>
+                    <h3>Программирование</h3>
+                    <p>Языки кода, алгоритмы и создание программных продуктов.</p>
+                    <button onclick="openModal('programming')">Подробнее</button>
+                </div>
 
-<div class="card glass-panel">
-<div class="icon">🔐</div>
-<h3>Кибербезопасность</h3>
-<p>Шифрование, защита личных данных и противодействие фишингу.</p>
-<button onclick="openModal('security')">Подробнее</button>
-</div>
+                <div class="card glass-panel">
+                    <div class="icon">🌐</div>
+                    <h3>Интернет и сети</h3>
+                    <p>Сетевые протоколы, IP-адресация и передача данных.</p>
+                    <button onclick="openModal('internet')">Подробнее</button>
+                </div>
 
-<div class="card glass-panel">
-<div class="icon">🐧</div>
-<h3>Операционные системы</h3>
-<p>Архитектура Windows, Linux и управление ресурсами.</p>
-<button onclick="openModal('os')">Подробнее</button>
-</div>
+                <div class="card glass-panel">
+                    <div class="icon">🔐</div>
+                    <h3>Кибербезопасность</h3>
+                    <p>Шифрование, защита личных данных и противодействие фишингу.</p>
+                    <button onclick="openModal('security')">Подробнее</button>
+                </div>
 
-<div class="card glass-panel">
-<div class="icon">🧠</div>
-<h3>Искусственный интеллект</h3>
-<p>Машинное обучение, нейросети и обработка данных.</p>
-<button onclick="openModal('ai')">Подробнее</button>
-</div>
-</div>
-</section>
+                <div class="card glass-panel">
+                    <div class="icon">🐧</div>
+                    <h3>Операционные системы</h3>
+                    <p>Архитектура Windows, Linux и управление ресурсами.</p>
+                    <button onclick="openModal('os')">Подробнее</button>
+                </div>
 
-<section id="test" class="test glass-panel">
-<h2>🧠 Проверка знаний</h2>
-<p>Готов проверить свои знания по информатике?</p>
+                <div class="card glass-panel">
+                    <div class="icon">🧠</div>
+                    <h3>Искусственный интеллект</h3>
+                    <p>Машинное обучение, нейросети и обработка данных.</p>
+                    <button onclick="openModal('ai')">Подробнее</button>
+                </div>
+            </div>
+        </section>
 
-<div id="high-score" class="high-score-badge"></div>
+        <section id="test" class="test glass-panel">
+            <h2>🧠 Проверка знаний</h2>
+            <p>Готов проверить свои знания по информатике?</p>
 
-<button onclick="startTest()" class="action-btn">Начать тест</button>
-<div id="quiz"></div>
-</section>
+            <div id="high-score" class="high-score-badge"></div>
 
-<section id="contact" class="contact-section glass-panel">
-<h2>📩 Задать вопрос</h2>
-<p>Есть вопросы по урокам? Напиши нам напрямую!</p>
+            <button onclick="startTest()" class="action-btn">Начать тест</button>
+            <div id="quiz"></div>
+        </section>
 
-<form id="contact-form" onsubmit="submitForm(event)">
-<input type="text" id="user-name" placeholder="Твоё имя" required>
-<input type="email" id="user-email" placeholder="Твой Email" required>
-<textarea id="user-message" rows="4" placeholder="Сообщение или вопрос..." required></textarea>
-<button type="submit" class="action-btn">Отправить сообщение</button>
-</form>
-<div id="form-status"></div>
-</section>
-</main>
+        <section id="contact" class="contact-section glass-panel">
+            <h2>📩 Задать вопрос</h2>
+            <p>Есть вопросы по урокам? Напиши нам напрямую!</p>
 
-<div id="modal" class="modal" onclick="closeModalOutside(event)">
-<div class="modal-content glass-panel">
-<span class="close-btn" onclick="closeModal()">×</span>
-<div id="modal-body"></div>
-</div>
-</div>
+            <form id="contact-form" onsubmit="submitForm(event)">
+                <input type="text" id="user-name" placeholder="Твоё имя" required>
+                <input type="email" id="user-email" placeholder="Твой Email" required>
+                <textarea id="user-message" rows="4" placeholder="Сообщение или вопрос..." required></textarea>
+                <button type="submit" class="action-btn">Отправить сообщение</button>
+            </form>
+            <div id="form-status"></div>
+        </section>
+    </main>
 
-<button id="scrollTopBtn" onclick="scrollToTop()">⬆</button>
+    <div id="modal" class="modal" onclick="closeModalOutside(event)">
+        <div class="modal-content glass-panel">
+            <span class="close-btn" onclick="closeModal()">×</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
 
-<footer>
-<p>© 2026 FARKHADOV. CLASS | Разработано для будущих инженеров</p>
-</footer>
+    <button id="scrollTopBtn" onclick="scrollToTop()">⬆</button>
 
+    <footer>
+        <p>© 2026 FARKHADOV. CLASS | Разработано для будущих инженеров</p>
+    </footer>
+
+</body>
+</html>
